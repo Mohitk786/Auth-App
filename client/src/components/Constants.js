@@ -1,1 +1,1 @@
-export const API_BASE = "http://localhost:5000/authApp"
+export const API_BASE = "https://auth-app-856s.onrender.com/authApp"
