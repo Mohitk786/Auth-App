@@ -7,8 +7,7 @@ const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  // Fetch all users from the API
-  useEffect(async() => {
+  const fetchData = async() => {
     setLoading(true)
     try{
         const response = await axios.get(`${API_BASE}/getAllUsers`, {withCredentials:true})
@@ -20,8 +19,12 @@ const AdminDashboard = () => {
     }finally{
         setLoading(false);
     }
-     
-  }, []);
+  }
+
+  
+  useEffect(()=>{
+    fetchData()
+  },[])
 
   const handleDelete = (userId) => {
     if (window.confirm("Are you sure you want to delete this user?")) {

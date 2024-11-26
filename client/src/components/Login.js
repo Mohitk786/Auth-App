@@ -22,14 +22,14 @@ export const Login = () => {
           password: LoginData.password,
         }, {withCredentials:true});
   
-        const isVerified = response.data.existingUser.verified;
-        const userId = response.data.existingUser._id;
-        const isAdmin = response.data.existingUser.role;
+        const isVerified = response?.data?.existingUser.verified;
+        const userId = response?.data?.existingUser._id;
+        const role = response?.data?.existingUser.role;
         if (isVerified) {
-          isAdmin ? navigate(`/admin/dashboard`) : navigate(`dasboard/${userId}`);
+          role ==="Admin" ? navigate(`/admin/dashboard`) : role === "Student" ? navigate(`/student/dashboard/${userId}`): navigate(`/instructor/dashboard/${userId}`);
         }
       } catch (err) {
-        toast.error(err.response.data.message)
+        toast.error(err.response?.data.message)
         return `<p>${err.message}</p>`
       }finally{
         setIsLoading(false)
