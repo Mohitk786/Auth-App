@@ -1,1 +1,1 @@
-export const API_BASE = "https://auth-app-1-f1f2.onrender.com/authApp"
+export const API_BASE = "https://vercel.com/mohit-kumars-projects-31358724/auth-app-fekp/GwCYo6LcGhkG99dy2hiazRuJ4mBN/authApp"
