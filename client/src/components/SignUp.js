@@ -48,7 +48,7 @@ export const SignUp = () => {
 
   return !isFormSubmitted ? (
     <div className="min-h-screen flex items-center justify-center">
-    {isLoading ? <form onSubmit={submitHandler} className="max-w-md mx-auto p-8 bg-white rounded-lg shadow-lg">
+    {!isLoading ? <form onSubmit={submitHandler} className="max-w-md mx-auto p-8 bg-white rounded-lg shadow-lg">
         <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
         <div className="mb-4">
           <input
@@ -134,7 +134,7 @@ export const SignUp = () => {
         >
           Sign Up
         </button>
-      </form> : <div className="flex flex-col gap-4 items-center"> <Loader /> <p>this may take upto 1 min due to free server hosting on render, please wait </p></div> } 
+      </form> : <div className="flex flex-col gap-4 items-center"> <Loader /> <p> this may take upto 1 min due to free server hosting on render, please wait </p> </div> } 
     </div>
   ): <p> We have sent you a Verification mail on ${formData.email}, please verify it is valid for 10 minutes.</p>;
 };
