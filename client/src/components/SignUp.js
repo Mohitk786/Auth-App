@@ -134,7 +134,7 @@ export const SignUp = () => {
         >
           Sign Up
         </button>
-      </form> } : <div className="flex flex-col gap-4 items-center"> <Loader /> <p>this may take upto 1 min due to free server hosting on render, please wait </div>
+      </form> : <div className="flex flex-col gap-4 items-center"> <Loader /> <p>this may take upto 1 min due to free server hosting on render, please wait </div> } 
     </div>
   ): <p> We have sent you a Verification mail on ${formData.email}, please verify it is valid for 10 minutes.</p>;
 };
