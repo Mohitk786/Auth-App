@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { API_BASE } from './Constants';
 import toast from 'react-hot-toast';
-import Loader from "./Loader"
+import Loader from './Loader'
 
 export const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -15,7 +15,8 @@ export const SignUp = () => {
     number: '',
   });
   const [isFormSubmitted, setFormSubmitted] = useState(false)
-  const [isLoading, setIsLoading] = useState(false)
+  const [isLoading, setIsLoading] = useState(false);
+
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
@@ -43,12 +44,13 @@ export const SignUp = () => {
       toast.error(err.response?.data?.message ? err.response?.data?.message : "Something is wrong")
       console.log('Something went wrong:', err.message);
     }finally{
-      setIsLoading(false);
+      setIsLoading(false)
+    }
   };
 
   return !isFormSubmitted ? (
     <div className="min-h-screen flex items-center justify-center">
-    {!isLoading ? <form onSubmit={submitHandler} className="max-w-md mx-auto p-8 bg-white rounded-lg shadow-lg">
+     {!isLoading ? <form onSubmit={submitHandler} className="max-w-md mx-auto p-8 bg-white rounded-lg shadow-lg">
         <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
         <div className="mb-4">
           <input
@@ -134,7 +136,10 @@ export const SignUp = () => {
         >
           Sign Up
         </button>
-      </form> : <div className="flex flex-col gap-4 items-center"> <Loader /> <p> This may take upto 1 min due to free server hosting on render, please wait </p> </div> } 
+      </form> : <div className='flex flex-col gap-4 items-center'>
+              <Loader />
+              <p>This may take upto 1 min due to free hosting on render.com </p>
+        </div>}
     </div>
   ): <p> We have sent you a Verification mail on ${formData.email}, please verify it is valid for 10 minutes.</p>;
 };
