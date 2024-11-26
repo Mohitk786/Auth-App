@@ -50,7 +50,7 @@ exports.SignUp = async (req, res) => {
   
       const message = `
                         <p>Click on the given link to verify your account:</p>
-                        <a href="${process.env.API_BASE}/authApp/user/verify/${user.id}/${token.token}" style="color: blue; text-decoration: underline;">
+                        <a href="${process.env.API_BASE}/authApp/user/verify/${user._id}/${token.token}" style="color: blue; text-decoration: underline;">
                             Verify Your Account
                         </a>
                     `;
