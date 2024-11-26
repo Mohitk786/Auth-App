@@ -1,16 +1,17 @@
 const express = require("express");
 const cors = require("cors");
+const cookieParser = require("cookie-parser")
 
 const app = express();
 require("dotenv").config();
 
 const corsOptions = {
-    origin: 'http://localhost:5000/',
+    origin: '*',  //we can change it later for our domain
     credentials: true,
     optionSuccessStatus: 200
 }
 app.use(cors(corsOptions));
-
+app.use(cookieParser())
 app.use(express.json());
 
 require("./config/database").connect();

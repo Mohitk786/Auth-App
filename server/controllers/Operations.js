@@ -2,7 +2,7 @@ const {User} = require("../models/User");
 
 exports.DeleteOne = async(req,res) => {
     try{
-        const {_id} = req.body;
+        const {_id} = req.params;
         await User.findByIdAndDelete({_id:_id});
 
         return res.status(200).json({

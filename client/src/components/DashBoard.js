@@ -6,10 +6,10 @@ import {useParams } from 'react-router';
 
 export const DashBoard = () => {
   const [allUsers, setAllUsers] = useState([]);
-  const { email } = useParams();
+  const { userId } = useParams();
 
   async function fetchData() {
-    const user = await axios.get(`${API_BASE}/getOne/${email}`);
+    const user = await axios.get(`${API_BASE}/getOne/${userId}`);
     const role = user.data.user.role;
 
     if (role === 'Admin') {

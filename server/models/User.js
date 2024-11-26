@@ -20,6 +20,7 @@ const UserSchema = new mongoose.Schema({
         type:String,
         required:true,
         trim:true,
+        
     },
     password:{
         type:String,
@@ -31,8 +32,8 @@ const UserSchema = new mongoose.Schema({
     },
     role:{
         type:String,
+        enum: ["Admin", "Student", "Instructor"],
         required:true,
-        trim:true,
     },
     verified:{
         type:Boolean,

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { API_BASE } from './Constants';
-import { useNavigate } from 'react-router-dom';
 
 export const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -10,10 +9,11 @@ export const SignUp = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    role: 'Admin',
+    role: 'Student',
     number: '',
   });
-  const navigate = useNavigate();
+  const [isFormSubmitted, setFormSubmitted] = useState(false)
+
 
   const changeHandler = (event) => {
     const { name, value } = event.target;
@@ -31,13 +31,16 @@ export const SignUp = () => {
   const signUp = async () => {
     try {
       await axios.post(`${API_BASE}/signUp`, formData);
-      navigate('/login');
+
+      //show email sent msg on success response of signup
+      setFormSubmitted(prev => !prev)
+
     } catch (err) {
       console.log('Something went wrong:', err.message);
     }
   };
 
-  return (
+  return !isFormSubmitted ? (
     <div className="min-h-screen flex items-center justify-center">
       <form onSubmit={submitHandler} className="max-w-md mx-auto p-8 bg-white rounded-lg shadow-lg">
         <h2 className="text-2xl font-semibold mb-4">Sign Up</h2>
@@ -94,7 +97,7 @@ export const SignUp = () => {
           >
             <option value="Admin">Admin</option>
             <option value="Student">Student</option>
-            <option value="Teacher">Teacher</option>
+            <option value="Teacher">Instructor</option>
           </select>
         </div>
         <div className="mb-4">
@@ -125,7 +128,7 @@ export const SignUp = () => {
         </button>
       </form>
     </div>
-  );
+  ): <p> We have sent you a Verification mail on ${formData.email}, please verify it is valid for 10 minutes.</p>;
 };
 
 
