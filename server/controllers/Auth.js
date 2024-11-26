@@ -23,9 +23,10 @@ exports.SignUp = async (req, res) => {
         
         let user = await User.findOne({ email: req.body.email });
         if (user){
-            return res.status(400).send("User with given email already exist!");
+            return res.status(400).json({
+                message:"User with given email already exist!"
+        });
         }
-        console.log("done")
       
       //hash the password
       const hashedPassword = await bcrypt.hash(password,10);
@@ -56,7 +57,9 @@ exports.SignUp = async (req, res) => {
   
   
       await sendEmail(email, "Verification email from assignmentApp", message);
-      res.send(`An Email sent to ${email}, please verify`);
+      res.json ({
+        data: `An Email sent to ${email}, please verify`
+      });
     } 
     
     catch (error) {
@@ -136,7 +139,9 @@ exports.VerifyUser = async (req, res) => {
         if (await bcrypt.compare(password, existingUser.password)) {
             const { verified } = existingUser;
             if (!verified) {
-                return res.send("Verify your email before login");
+                return res.json({
+                    message:"Verify your email before login"
+                });
             }
 
             let token = jwt.sign(payload, process.env.JWT_SECRET, {

@@ -1,6 +1,6 @@
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
-const User = require("../models/User");
+const {User} = require("../models/User")
 dotenv.config();
 
 exports.auth = async (req, res, next) => {
@@ -75,10 +75,10 @@ exports.isInstructor = async (req, res, next) => {
 
 exports.isAdmin = async (req, res, next) => {
 	try {
-		console.log(req.user.email)
+		const {email} = req.user
 		if(req.user){
-			const userDetails = await User.findOne({ email: req.user.email });
-		
+			const userDetails = await User.findOne({email });
+			
 			if (userDetails.role !== "Admin") {
 				return res.status(401).json({
 					success: false,

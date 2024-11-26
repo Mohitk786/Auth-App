@@ -23,7 +23,7 @@ exports.getUsers = async(req,res) => {
         res.status(200).json({
             success:true,
             message:"All user fetched successfully",
-            allUsers,
+            data:allUsers,
         })
 
     }catch(err){

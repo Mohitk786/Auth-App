@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router(); 
 
 const {SignUp, Login, VerifyUser} =  require("../controllers/Auth");
-const {DeleteOne,GetOne, getUsers} = require("../controllers/Operations");
+const {DeleteOne, getUsers} = require("../controllers/Operations");
 const {auth, isAdmin, isStudent} = require("../middleware/auth")
 
 router.post("/signup", SignUp)
