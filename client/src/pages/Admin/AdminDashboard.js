@@ -1,18 +1,19 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { API_BASE } from "../../components/Constants";
+import Loader from "../../components/Loader"
 
 const AdminDashboard = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
 
   // Fetch all users from the API
-  useEffect(() => {
+  useEffect(async() => {
     setLoading(true)
     try{
-        const response = axios.get(`${API_BASE}/getAllUsers`, {withCredentials:true})
-        console.log(response.data)
-        setUsers(response.data)
+        const response = await axios.get(`${API_BASE}/getAllUsers`, {withCredentials:true})
+        console.log(response.data.data)
+        setUsers(response.data.data)
 
     }catch(error){
         console.error("Error fetching users:", error.message);
@@ -39,11 +40,9 @@ const AdminDashboard = () => {
     }
   };
 
-  if (loading) {
-    return <p className="text-center text-xl">Loading...</p>;
-  }
+  
 
-  return (
+  return !loading ? (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold text-center mb-6">Admin Dashboard</h1>
       <h2 className="text-2xl font-semibold mb-4">List of Users</h2>
@@ -81,7 +80,7 @@ const AdminDashboard = () => {
         </table>
       </div>
     </div>
-  );
+  ) : <Loader />
 };
 
 export default AdminDashboard;

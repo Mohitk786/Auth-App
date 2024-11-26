@@ -3,6 +3,7 @@ import axios from 'axios';
 import { API_BASE } from './Constants';
 import { useNavigate } from 'react-router-dom';
 import Loader from './Loader';
+import {toast} from 'react-hot-toast'
 
 
 
@@ -28,7 +29,7 @@ export const Login = () => {
           isAdmin ? navigate(`/admin/dashboard`) : navigate(`dasboard/${userId}`);
         }
       } catch (err) {
-        console.log('Error while trying to login:', err.message);
+        toast.error(err.response.data.message)
         return `<p>${err.message}</p>`
       }finally{
         setIsLoading(false)

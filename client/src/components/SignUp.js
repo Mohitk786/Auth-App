@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { API_BASE } from './Constants';
+import toast from 'react-hot-toast';
 
 export const SignUp = () => {
   const [formData, setFormData] = useState({
@@ -30,12 +31,14 @@ export const SignUp = () => {
 
   const signUp = async () => {
     try {
-      await axios.post(`${API_BASE}/signUp`, formData);
+      const res = await axios.post(`${API_BASE}/signUp`, formData);
 
       //show email sent msg on success response of signup
       setFormSubmitted(prev => !prev)
+      toast.success(res.data.message)
 
     } catch (err) {
+      toast.error(err.response?.data?.message ? err.response?.data?.message : "Something is wrong")
       console.log('Something went wrong:', err.message);
     }
   };
@@ -105,6 +108,7 @@ export const SignUp = () => {
             type="password"
             placeholder="Create Password"
             onChange={changeHandler}
+            min={8}
             name="password"
             value={formData.password}
             className="w-full p-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
@@ -115,6 +119,7 @@ export const SignUp = () => {
             type="password"
             placeholder="Confirm Password"
             onChange={changeHandler}
+            min={8}
             name="confirmPassword"
             value={formData.confirmPassword}
             className="w-full p-2 rounded-lg border border-gray-300 focus:outline-none focus:border-blue-500"
